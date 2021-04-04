@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.sprHotelMbts.projectT3.roomOptn.IRoomOptnQEBC">
+
+	<resultMap type = "roomOptnDto" id = "roomOptn">
+		<result property="roomNo" column="RUM_NO"/>
+		<result property="roomOptnNo" column="RUM_OPTN_NO"/>
+	</resultMap>
+
+	<!-- <select id="hotelSerialNo" resultType="String">
+		SELECT NVL(MAX(HOTEL_NO), 0)+1 commNo FROM HOTEL_OPTN
+	</select> -->
+		
+
+	
+	<!-- 고객이 검색창에 입력할때 호텔이름 or 지역 -->
+	<!-- ERD에 지역추가? db에 AREA추가? -->
+	<select id="sltAll" resultMap="roomOptn">
+	<![CDATA[
+		SELECT * 	
+		FROM   RUM_OPTN
+		WHERE  RUM_NO = #{roomNo} 	    	
+		ORDER  BY to_number(RUM_NO)		    
+	]]>
+	</select>
+
+	
+</mapper>

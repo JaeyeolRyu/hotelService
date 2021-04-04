@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sprHotelMbts.projectT3.hotPlace.IHotPlaceQEBC">
+
+	<resultMap type="HotDTO" id="hotDto">
+		
+		<result property="hotNo" column="TRRSRT_NO" />
+		<result property="hotNm" column="TRRSRT_NM" />
+		<result property="address" column="TRRSRT_ADRES" />
+		<result property="photo" column="TRRSRT_PHOTO" />
+		
+		
+	</resultMap> 
+	
+		<select id="sltAll" resultMap="hotDto">
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( SELECT *			    
+								      FROM   CFR_TRRSRT 	    
+									  WHERE  1=1    
+								      ORDER  BY TRRSRT_NO		    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{start} 					
+						AND    ROWNUM  <=  #{cnt}	
+	]]>
+	</select>
+	
+	
+	<select id="sltName" resultMap="hotDto">
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( SELECT *			    
+								      FROM   CFR_TRRSRT 	    
+									  WHERE  TRRSRT_NM LIKE  #{value} || '%'	    
+								      ORDER  BY TRRSRT_NO		    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{start} 					
+						AND    ROWNUM  <=  #{cnt}	
+	]]>
+	</select>
+	
+	<select id="sltAddress" resultMap="hotDto">
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( SELECT *			    
+								      FROM   CFR_TRRSRT 	    
+									  WHERE  TRRSRT_ADRES LIKE  #{value} || '%'    
+								      ORDER  BY TRRSRT_NO	    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{start} 					
+						AND    ROWNUM  <=  #{cnt}	
+	]]>
+	</select>
+	
+	
+
+	
+	<select id="serialNo" resultType="hotDto">
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( SELECT *			    
+								      FROM   RESVE 	    
+									  WHERE  CSTMR_NO=#{custNo}	    
+								      ORDER  BY CODE		    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{startNo} 					
+						AND    ROWNUM  <=  #{cnt}	
+	]]>
+	</select>
+
+
+
+</mapper>
+

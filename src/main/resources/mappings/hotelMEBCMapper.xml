@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sprHotelMbts.projectT3.hotel.IHotelMEBC">
+	<!-- 
+	<select id="sltOne" resultType="hotelDto"  >
+		SELECT * FROM HOTEL WHERE hotel_Nm = #{hotel_Nm}
+	</select>
+	 -->
+	
+	<resultMap type = "hotelDto" id = "hotel">
+		<result property="hotelNo" column="HOTEL_NO" />
+		<result property="hotelNm" column="HOTEL_NM" /> 
+		<result property="hotelAddress" column="HOTEL_ADRES" />
+		<result property="hotelTel" column="HOTEL_TELNO" />
+		<result property="hotelExplain" column="HOTEL_INTRCN" />
+		<result property="hotelHomepage" column="HOTEL_HMPG" />
+		<result property="hotelPhoto" column="HOTEL_PHOTO" />
+	</resultMap>
+	
+
+	
+	<select id="hotelSltOneMEBC" resultType="hotelDto" resultMap="hotel" >
+		SELECT * FROM HOTEL WHERE HOTEL_NO = #{hotelNo}
+	</select>
+	
+	
+
+	<insert id="hotelInsert" parameterType="hotelDto">
+		INSERT INTO HOTEL ( HOTEL_NO, HOTEL_NM, HOTEL_ADRES, HOTEL_TELNO, HOTEL_INTRCN, HOTEL_HMPG, HOTEL_PHOTO )
+		VALUES( #{hotelNo}, #{hotelNm}, #{hotelAddress}, #{hotelTel}, #{hotelExplain}, #{hotelHomepage}, #{hotelPhoto} )
+	</insert>
+	
+	<update id="hotelUpdate" parameterType="hotelDto">
+		UPDATE HOTEL 
+		SET 
+	     HOTEL_NM 		= #{hotelNm}
+	    ,HOTEL_ADRES 	= #{hotelAddress}
+	    ,HOTEL_TELNO 	= #{hotelTel}
+	    ,HOTEL_INTRCN 	= #{hotelExplain}
+	    ,HOTEL_HMPG 	= #{hotelHomepage}
+	    ,HOTEL_PHOTO 	= #{hotelPhoto}
+		WHERE HOTEL_NO 	= #{hotelNo}
+	</update>
+	
+	<delete id="hotelDelete">
+		DELETE FROM HOTEL 
+		WHERE HOTEL_NO = #{hotelNo}
+	</delete>
+	
+</mapper>
+

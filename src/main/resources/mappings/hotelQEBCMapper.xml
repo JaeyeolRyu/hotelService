@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.sprHotelMbts.projectT3.hotel.IHotelQEBC">
+
+	<resultMap type = "hotelDto" id = "hotel">
+		<result property="hotelNo" column="HOTEL_NO" />
+		<result property="hotelNm" column="HOTEL_NM" /> 
+		<result property="hotelAddress" column="HOTEL_ADRES" />
+		<result property="hotelTel" column="HOTEL_TELNO" />
+		<result property="hotelExplain" column="HOTEL_INTRCN" />
+		<result property="hotelHomepage" column="HOTEL_HMPG" />
+		<result property="hotelPhoto" column="HOTEL_PHOTO" />
+	</resultMap>
+	
+	<resultMap type = "hotelEvlDto" id = "hotelEvl">
+		<result property="hotelNo" column="HOTEL_NO" />
+		<result property="hotelNm" column="HOTEL_NM" /> 
+		<result property="hotelAddress" column="HOTEL_ADRES" />
+		<result property="hotelTel" column="HOTEL_TELNO" />
+		<result property="hotelExplain" column="HOTEL_INTRCN" />
+		<result property="hotelHomepage" column="HOTEL_HMPG" />
+		<result property="hotelPhoto" column="HOTEL_PHOTO" />
+		<result property="evlAvg" column="AVG(E.EVL_SCORE)" />
+		
+	</resultMap>
+	
+	
+	
+	<resultMap type = "roomDto" id = "room">
+		<result property="roomNo" column="RUM_NO" />
+		<result property="hotelNo" column="HOTEL_NO" />
+		<result property="roomNm" column="RUM_NM" /> 
+		<result property="roomPc" column="RUM_PC" />
+		<result property="rHeadCount" column="RUM_NMPR" />
+		<result property="roomPhoto" column="RUM_PHOTO" />
+		<result property="roomSize" column="RUM_MG" />
+		<result property="sCount" column="RESVE_CO" />
+	</resultMap>
+	
+	<resultMap type = "roomOptnDto" id = "roomOptn">
+		<result property="roomNo" column="RUM_NO"/>
+		<result property="roomOptnNo" column="RUM_OPTN_NO"/>
+	</resultMap>
+	
+	<resultMap type = "roomOptnJoinDto" id = "roomOptnJoin">
+		<result property="roomNo" column="RUM_NO"/>
+		<result property="roomOptnNm" column="CMMN_CODE_NM"/>
+	</resultMap>
+	
+	<resultMap type = "roomDto" id = "roomTest">
+		<result property="roomNo" column="RUM_NO" />
+		<result property="hotelNo" column="HOTEL_NO" />
+		<result property="roomNm" column="RUM_NM" /> 
+		<result property="roomPc" column="RUM_PC" />
+		<result property="rHeadCount" column="RUM_NMPR" />
+		<result property="roomPhoto" column="RUM_PHOTO" />
+		<result property="roomSize" column="RUM_MG" />
+		<result property="sCount" column="RESVE_CO" />
+		<result property="roomOptnNo" column="RUM_OPTN_NO"/>
+	</resultMap>
+	
+
+	<select id="hotelSerialNo" resultType="String">
+		SELECT NVL2(MAX(HOTEL_NO), LPAD(MAX(HOTEL_NO)+1,6,0) , '000001') 
+		FROM HOTEL
+	</select>
+		
+
+	
+	<select id="hotelsltOneQEBC" resultMap="hotel">
+		SELECT * FROM HOTEL WHERE HOTEL_NM = #{hotelNM}
+	</select>
+	
+	<!-- 고객이 검색창에 입력할때 호텔이름 or 지역 -->
+	<!-- ERD에 지역추가? db에 AREA추가? -->
+	<select id="hotelSltSearch" resultMap="hotel">
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( SELECT *			    
+								      FROM   HOTEL 	    	
+									  WHERE  HOTEL_NM LIKE #{value}||'%'	 
+									  OR	 HOTEL_ADRES LIKE #{value}||'%'  
+								      ORDER  BY to_number(HOTEL_NO)		    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{start}					
+						AND    ROWNUM  <=  #{cnt}	
+	]]>
+	</select>
+	
+	<select id="hotelSltName" resultMap="hotel" >
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( SELECT *			    
+								      FROM   HOTEL 	    
+									  WHERE  HOTEL_NM LIKE #{value}||'%'	    
+								      ORDER  BY to_number(HOTEL_NO)		    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{start} 					
+						AND    ROWNUM  <=  #{cnt}
+	]]>
+	</select>
+	
+	<select id="hotelSltAddress" resultMap="hotel">
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( SELECT *			    
+								      FROM   HOTEL 	    
+									  WHERE  HOTEL_ADRES LIKE #{value}||'%'	 		    
+								      ORDER  BY to_number(HOTEL_NO)		    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{start} 					
+						AND    ROWNUM  <=  #{cnt}	
+	]]>
+	</select>
+	
+		<select id="roomSltMulti" resultMap="room">
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( 
+										SELECT R.* 
+										FROM   HOTEL H
+										LEFT   OUTER JOIN RUM R 
+										ON     H.HOTEL_NO = R.HOTEL_NO 
+										WHERE  H.HOTEL_NO= #{hotelNo}
+							   	
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{start} 					
+						AND    ROWNUM  <=  #{cnt}	
+	]]>
+	</select>
+	
+	<select id="roomOptnSltMulti" resultMap="roomOptnJoin">
+	<![CDATA[
+	
+			 SELECT *
+             FROM   RUM_OPTN R
+             JOIN   cmmn_code O 
+             ON     R.RUM_OPTN_NO = O.CMMN_CODE_NO 
+             JOIN   RUM Y
+             ON     Y.RUM_NO = R.RUM_NO
+             AND    Y.RUM_NO= #{roomNo}
+		
+	]]>
+	</select>
+	
+	<select id="roomOptnTest" resultMap="roomTest">
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( 
+                                        SELECT R.* 
+                                            ,  p.rum_optn_no
+										FROM   RUM R
+										JOIN   HOTEL H 
+										ON     H.HOTEL_NO = R.HOTEL_NO
+										AND    H.HOTEL_NO = #{hotelNo} 
+                                        JOIN   RUM_OPTN P
+                                        ON     R.RUM_NO = P.RUM_NO
+                                        AND    R.RUM_NO = #{roomNo}
+							   	
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{start} 					
+						AND    ROWNUM  <=  #{cnt}
+	]]>
+	</select>
+	
+	
+	
+	
+	
+<select id="sltHotelEvl" resultMap="hotelEvl">
+
+		<![CDATA[
+					SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM (   SELECT H.HOTEL_NO,HOTEL_NM,HOTEL_ADRES,HOTEL_TELNO,HOTEL_INTRCN,HOTEL_HMPG,HOTEL_PHOTO, AVG(E.EVL_SCORE) 
+										FROM HOTEL H
+										JOIN EVL E
+										ON H.HOTEL_NO = E.HOTEL_NO
+										WHERE  HOTEL_NM LIKE #{value}||'%'	 
+									    OR	 HOTEL_ADRES LIKE #{value}||'%'  
+										GROUP BY H.HOTEL_NO,HOTEL_NM,HOTEL_ADRES,HOTEL_TELNO,HOTEL_INTRCN,HOTEL_HMPG,HOTEL_PHOTO
+										ORDER BY H.HOTEL_NO	    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{start}					
+						AND    ROWNUM  <=  #{cnt}	
+	]]>
+	
+	</select>
+
+	
+</mapper>

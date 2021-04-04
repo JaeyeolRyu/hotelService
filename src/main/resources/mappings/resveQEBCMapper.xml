@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sprHotelMbts.projectT3.reservation.IResveQEBC">
+
+
+
+
+	<resultMap type="resveDto" id="resve">
+
+	<result property="resveNo"    column="RESVE_NO" />
+	<result property="custNo"    column="CSTMR_NO" />
+	<result property="rumNo"      column="RUM_NO" />
+	<result property="payDay"     column="SETLEDE" />
+	<result property="payCode"    column="SETLE_MN_CODE" />
+	<result property="resvePc"    column="RESVE_PC" />
+	<result property="checkIn"    column="CHKIN_DATE" />
+	<result property="checkOut"   column="CHCKT_DATE" />
+	<result property="cancelAt"   column="CANCL_PHOTO" />
+	<result property="fUpdateDay" column="FRST_UPDDE" />
+	<result property="lUpdateDay" column="LAST_UPDDE" />
+	<result property="fUpdateId"  column="FRST_UPDT_ID" />	
+	<result property="lUpdateId"  column="LAST_UPDT_ID" />					
+		
+		
+	</resultMap> 
+	
+	<resultMap type="resveListDto" id="resveList">
+
+	<result property="resveNo"    column="RESVE_NO" />
+	<result property="checkIn"    column="CHKIN_DATE" />
+	<result property="checkOut"   column="CHCKT_DATE" />
+	<result property="hotelNm"     column="HOTEL_NM" />
+	<result property="resvePc"      column="RESVE_PC" />
+	<result property="payDate"     column="SETLEDE" />
+	<result property="payNm"    column="CMMN_CODE_NM" />
+	<result property="cancelAt"    column="CANCL_AT" />	
+	<result property="hotelNo"    column="HOTEL_NO" />		
+	</resultMap> 
+
+
+
+
+
+	<select id="sltCustNo" resultMap="resveList">
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM (
+							   
+							   
+							         SELECT R.RESVE_NO
+									      , R.CHKIN_DATE
+									      , R.CHCKT_DATE
+									      , H.HOTEL_NM 
+									      , R.RESVE_PC
+									      , R.SETLEDE
+									      , C.CMMN_CODE_NM
+									      , R.CANCL_AT
+									      , H.HOTEL_NO
+									 FROM  RESVE R
+									 JOIN  RUM O
+									 ON    R.RUM_NO = O.RUM_NO
+									 AND   R.CSTMR_NO =#{custNo}
+									 JOIN  HOTEL H
+									 ON    O.HOTEL_NO= H.HOTEL_NO
+									 JOIN  CMMN_CODE C
+									 ON    R.SETLE_MN_CODE = C.CMMN_CODE_NO
+									 ORDER BY R.RESVE_NO DESC
+								      
+								      		    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{startNo} 					
+						AND    ROWNUM  <=  #{cnt}	
+	]]>
+	</select>
+	
+	<select id="sltName" resultMap="resve">
+	
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( SELECT *			    
+								      FROM   RESVE 	    
+									  WHERE  CSTMR_NO=#{custNo}	    
+								      ORDER  BY CODE DESC		    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{startNo} 					
+						AND    ROWNUM  <=  #{cnt}	
+	]]>
+	</select>
+	
+	<select id="sltPayDate" resultMap="resve">
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( SELECT *			    
+								      FROM   RESVE 	    
+									  WHERE  CSTMR_NO=#{custNo}	    
+								      ORDER  BY CODE		    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{startNo} 					
+						AND    ROWNUM  <=  #{cnt}	
+	]]>
+	</select>
+	
+	<select id="sltDate" resultMap="resve">
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( SELECT *			    
+								      FROM   RESVE 	    
+									  WHERE  CSTMR_NO=#{custNo}	    
+								      ORDER  BY CODE		    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{startNo} 					
+						AND    ROWNUM  <=  #{cnt}	
+	]]>
+	</select>
+	            
+	<select id="serialNo"  resultType="String">
+		SELECT NVL2(MAX(RESVE_NO), LPAD(MAX(RESVE_NO)+1, 10,'0'),'0000000001') FROM RESVE
+	</select>
+
+
+
+</mapper>
+

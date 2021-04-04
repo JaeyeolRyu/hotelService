@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.wrap {
+    height: 100%;
+    width: 100%;
+    background-image: url(img/background3.jpg);
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+}
+.form-wrap {
+    width: 760px;
+    height: 700px;
+
+    margin: 3% auto;
+        
+    background: #fff;
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 30px;
+}
+/* .button-wrap {
+    width: 230px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 600px 9px #fcae8f;
+    border-radius: 30px;
+} */
+.togglebtn {
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: absolute;
+}
+/* #btn {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    background: linear-gradient(to right, #ff105f, #ffad06);
+    border-radius: 30px;
+    transition: .5s;
+} */
+
+ .input-group {
+ 	top: 10px;
+    margin-top: 30px;
+    position: absolute;
+    min-width: 100px;
+    transition: .5s;
+} 
+.input-field {
+    width: 80%;
+    padding: 5px 0;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+.input-field2 {
+    width: 80%;
+    padding: 5px 0;
+    margin: 5px 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+}
+.mybtn{
+	width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(to right, #6464cd, #7b68ee);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+
+.leftbtn{
+	width: 35%;
+    padding: 10px 10px;
+    cursor: pointer;
+    display: inline;
+    margin-left: 20px ;
+    background: linear-gradient(to right,#6464cd, #3ca0e1);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+
+.rightbtn{
+	
+	width: 35%;
+    padding: 10px 10px;
+    cursor: pointer;
+    display: inline;
+    margin: auto;
+    background: linear-gradient(to right, #6464cd, #3ca0e1);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+
+.submit {
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(to right, #6464cd, #3ca0e1);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+.checkbox {
+    margin: 30px 10px 30px 0;
+}
+span {
+    color: #777;
+    font-size: 12px;
+    bottom: 68px;
+    position: absolute;
+}
+#login {
+    left: 50px;
+}
+
+#updateFrm {
+    left: 50px;
+}
+
+#emailfind {
+    left: 50px;
+}
+
+#register {
+    left: 450px;
+}

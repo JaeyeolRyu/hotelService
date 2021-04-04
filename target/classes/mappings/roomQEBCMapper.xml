@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sprHotelMbts.projectT3.room.IRoomQEBC">
+
+	<resultMap type = "roomDto" id = "room">
+		<result property="roomNo" column="RUM_NO" />
+		<result property="hotelNo" column="HOTEL_NO" />
+		<result property="roomNm" column="RUM_NM" /> 
+		<result property="roomPc" column="RUM_PC" />
+		<result property="rHeadCount" column="RUM_NMPR" />
+		<result property="roomPhoto" column="RUM_PHOTO" />
+		<result property="roomSize" column="RUM_MG" />
+		<result property="sCount" column="RESVE_CO" />
+	</resultMap>
+	
+
+	<select id="serialNo" resultType="String">
+		SELECT NVL2(MAX(RUM_NO), LPAD(MAX(RUM_NO)+1,9,0) , '000000001') 
+		FROM RUM
+	</select>
+	
+	
+	<select id="sltOne" resultMap="room">
+		SELECT * FROM RUM WHERE RUM_NM = #{roomNm}
+	</select>
+	
+	<!-- 전체조회? 조건 어떻게? -->
+	<select id="sltAll" resultMap="room">
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( SELECT *			    
+								      FROM   RUM 	    	
+									  WHERE  HOTEL_NO = #{hotelNo}
+									  OR	 RUM_NM LIKE #{value}||'%'	 
+									  OR	 RESVE_CO LIKE #{value}||'%'
+									  OR	 RUM_NO LIKE #{value}||'%'   
+								      ORDER  BY to_number(RUM_NO)	    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{start}					
+						AND    ROWNUM  <=  #{cnt}	
+	]]>
+	</select>
+	
+	<select id="sltName" resultMap="room" >
+	<![CDATA[
+		SELECT * 	
+						FROM ( SELECT O.*				    
+								    , ROWNUM RNUM 		    
+							   FROM ( SELECT *			    
+								      FROM   RUM
+									  WHERE  HOTEL_NO = #{hotelNo} 
+									  AND	 RUM_NM LIKE #{value}||'%'  
+								      ORDER  BY to_number(RUM_NO)		    
+								    ) O					    
+							 ) 							    
+						WHERE  RNUM    >=  #{start} 					
+						AND    ROWNUM  <=  #{cnt}
+	]]>
+	</select>
+	
+	<select id="sltOneAll" resultMap="room">
+	<![CDATA[
+		SELECT * 	
+							FROM ( SELECT O.*				    
+									    , ROWNUM RNUM 		    
+								   FROM ( SELECT *			    
+									      FROM   RUM 	    	
+										  WHERE  HOTEL_NO = #{hotelNo}	    
+									    ) O					    
+								 ) 							    
+							WHERE  RNUM    >=  #{start} 					
+							AND    ROWNUM  <=  #{cnt}
+	]]>
+	</select>
+
+	
+</mapper>

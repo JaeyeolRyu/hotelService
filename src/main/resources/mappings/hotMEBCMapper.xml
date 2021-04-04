@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sprHotelMbts.projectT3.hotPlace.IHotPlaceMEBC">
+
+	<resultMap type="HotDTO" id="hotDto">
+		
+		<result property="hotNo" column="TRRSRT_NO" />
+		<result property="hotNm" column="TRRSRT_NM" />
+		<result property="address" column="TRRSRT_ADRES" />
+		<result property="photo" column="TRRSRT_PHOTO" />
+		
+		
+	</resultMap> 
+	
+
+
+	<select id="sltOne" resultMap="hotDto">
+	   SELECT 
+		       TRRSRT_NO
+			 , TRRSRT_NM
+			 , tRRSRT_ADRES
+			 , TRRSRT_PHOTO
+	   FROM    CFR_TRRSRT
+	   WHERE   TRRSRT_NO=#{hotNo} 
+	</select>
+
+	<insert id="insert" parameterType="hotDto">
+	
+		INSERT INTO CFR_TRRSRT(
+			   TRRSRT_NO
+			 , TRRSRT_NM
+			 , TRRSRT_ADRES
+			 , TRRSRT_PHOTO )
+		VALUES (
+			   #{hotNo}
+			 , #{hotNm}
+			 , #{address}
+			 , #{photo} )
+	</insert>
+
+	<update id="update" parameterType="hotDto">
+		UPDATE CFR_TRRSRT SET
+			   TRRSRT_NM       = #{hotNm}
+			 , TRRSRT_ADRES	   = #{address}
+			 , TRRSRT_PHOTO    = #{photo}
+		 WHERE TRRSRT_NO = #{hotNo}
+	</update>
+
+	<delete id="delete" >
+		DELETE FROM CFR_TRRSRT WHERE
+		TRRSRT_NO = #{hotNo}
+	</delete>
+
+</mapper>
+

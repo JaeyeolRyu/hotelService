@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.sprHotelMbts.projectT3.cust.ICustQEBC">
+
+	<resultMap type="custDto" id="cust">
+	
+		<result property="custNo" column="CSTMR_NO" />
+		<result property="custEmail" column="CSTMR_EMAIL" />
+		<result property="custPw" column="CSTMR_PASSWORD" />
+		<result property="custName" column="CSTMR_NM" />
+		<result property="custTel" column="CSTMR_TELNO" />
+		<result property="custRegDate" column="CSTMR_SRBDE" />
+		<result property="custGrade" column="CSTMRGRAD_CODE" />
+		<result property="custMilage" column="MLG" />
+		<result property="custWithdraw" column="SECSN_AT" />
+		<result property="custAdmin" column="MNGR_AT" />
+
+	</resultMap> 
+
+	<select id="sltName" resultMap="cust" >
+		<![CDATA[ 
+		SELECT *
+		FROM (  SELECT O.*				
+	          		 , ROWNUM RNUM 	
+		 		  FROM ( SELECT * 		
+				 		 FROM   CSTMR 
+						 WHERE  CSTMR_NM LIKE '%'|| #{value} || '%'
+						 ORDER BY CSTMR_NM	
+			  		   ) O	
+			 )
+		WHERE RNUM >= #{start}	
+		AND ROWNUM <= #{cnt}
+		]]>
+	</select>
+	
+	<select id="sltEmail" resultMap="cust">
+		<![CDATA[ 
+		SELECT *
+		FROM (  SELECT O.*				
+	          		 , ROWNUM RNUM 	
+		 		  FROM ( SELECT * 		
+				 		 FROM   CSTMR 
+						 WHERE  CSTMR_EMAIL LIKE #{value} || '%'
+						 ORDER BY CSTMR_NM	
+			  		   ) O	
+			 )
+		WHERE RNUM >= #{start}	
+		AND ROWNUM <= #{cnt}
+		]]>
+	</select>
+
+	<select id="sltOneEmail" resultType="custDto" resultMap="cust">
+		SELECT * FROM CSTMR
+		WHERE CSTMR_EMAIL = #{custEmail}
+	</select>
+	
+	<select id="sltOneFind" resultType="custDto" resultMap="cust">
+		SELECT * FROM CSTMR
+		WHERE CSTMR_NM = #{custName} AND CSTMR_TELNO = #{custTel}
+	</select>
+
+	<select id="serialNoMbr" resultType="String">
+		SELECT NVL2(MAX(CSTMR_NO),'M'||LPAD(REPLACE(MAX(CSTMR_NO),'M')+1, 7,'0'),'M0000001') FROM CSTMR WHERE CSTMR_NO LIKE 'M%'
+	</select>
+	
+	<select id="serialNoNonMbr" resultType="String">
+		SELECT NVL2(MAX(CSTMR_NO),'N'||LPAD(REPLACE(MAX(CSTMR_NO),'N')+1, 7,'0'),'N0000001') FROM CSTMR WHERE CSTMR_NO LIKE 'N%'
+	</select>
+
+</mapper>

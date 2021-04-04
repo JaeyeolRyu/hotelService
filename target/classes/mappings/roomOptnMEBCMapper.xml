@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sprHotelMbts.projectT3.roomOptn.IRoomOptnMEBC">
+	<!-- 
+	<select id="sltOne" resultType="hotelDto"  >
+		SELECT * FROM HOTEL WHERE hotel_Nm = #{hotel_Nm}
+	</select>
+	 -->
+	
+	<resultMap type = "roomOptnDto" id = "roomOptn">
+		<result property="roomNo" 	   column="RUM_NO"/>
+		<result property="roomOptnNo" column="RUM_OPTN_NO"/>
+	</resultMap>
+	
+	<select id="sltOne" resultType="roomOptnDto" resultMap="roomOptn" >
+		SELECT * FROM RUM_OPTN WHERE RUM_NO = #{roomNo} AND RUM_OPTN_NO = #{roomOptnNo}
+	</select>
+	
+	<insert id="insert" parameterType="map">
+		INSERT INTO RUM_OPTN ( RUM_NO, RUM_OPTN_NO )
+		VALUES( #{roomNo}, #{roomOptnNo} )
+	</insert>
+	
+	<update id="Update" parameterType="roomOptnDto">
+		UPDATE RUM_OPTN 
+		 SET 
+	    RUM_OPTN_NO 	= #{RUM_OPTN_NO}
+		WHERE RUM_NO 	= #{roomNo}
+		AND RUM_OPTN_NO = #{roomOptnNo}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM RUM_OPTN 
+		WHERE RUM_NO = #{roomNo}
+		AND RUM_OPTN_NO = #{roomOptnNo}
+	</delete>
+	
+</mapper>
+

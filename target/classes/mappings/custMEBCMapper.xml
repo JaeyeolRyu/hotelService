@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.sprHotelMbts.projectT3.cust.ICustMEBC">
+	
+	
+	
+	<resultMap type="custDto" id="cust">	
+		<result property="custNo" column="CSTMR_NO" />
+		<result property="custEmail" column="CSTMR_EMAIL" />
+		<result property="custPw" column="CSTMR_PASSWORD" />
+		<result property="custName" column="CSTMR_NM" />
+		<result property="custTel" column="CSTMR_TELNO" />
+		<result property="custRegDate" column="CSTMR_SRBDE" />
+		<result property="custGrade" column="CSTMRGRAD_CODE" />
+		<result property="custMilage" column="MLG" />
+		<result property="custWithdraw" column="SECSN_AT" />
+		<result property="custAdmin" column="MNGR_AT" />
+	</resultMap> 
+	
+	<select id="sltOneNo" resultMap="cust">
+		SELECT * FROM CSTMR
+		 WHERE CSTMR_NO = #{custNo} 
+	</select>
+
+	<insert id="insert" parameterType="custDto">
+		INSERT INTO CSTMR (CSTMR_NO, CSTMR_EMAIL, CSTMR_PASSWORD, CSTMR_NM, CSTMR_TELNO, CSTMR_SRBDE, CSTMRGRAD_CODE, MLG, SECSN_AT, MNGR_AT)
+		VALUES( #{custNo}, #{custEmail}, #{custPw}, #{custName}, #{custTel}, SYSDATE, '0101', 0, 'N', 'N')
+	</insert>
+	
+	<update id="update" parameterType="custDto">
+		UPDATE CSTMR
+		SET 
+		CSTMR_PASSWORD=#{custPw}, CSTMR_TELNO=#{custTel}, CSTMR_NM=#{custName}, CSTMRGRAD_CODE=#{custGrade}
+		WHERE
+		CSTMR_NO = #{custNo}
+	</update>
+
+	<update id="adUpdate" parameterType="custDto">
+		UPDATE CSTMR
+		SET 
+		CSTMR_EMAIL=#{custEmail}, CSTMR_TELNO=#{custTel}, CSTMR_NM=#{custName}, CSTMR_PASSWORD=#{custPw}
+		WHERE
+		CSTMR_NO = #{custNo}
+	</update>
+
+
+	<update id="cancel">
+		UPDATE CSTMR
+		SET 
+		SECSN_AT= 'Y'
+		WHERE
+		CSTMR_NO = #{custNo}
+	</update>
+
+	<delete id="delete" parameterType="String">
+		DELETE FROM CSTMR 
+		WHERE CSTMR_NO = #{custNo}
+	</delete>
+
+</mapper>

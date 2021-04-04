@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sprHotelMbts.projectT3.reservation.IResveMEBC">
+
+
+	<resultMap type="resveDto" id="resve">
+
+	<result property="resveNo"    column="RESVE_NO" />
+	<result property="custNo"    column="CSTMR_NO" />
+	<result property="rumNo"      column="RUM_NO" />
+	<result property="payDay"     column="SETLEDE" />
+	<result property="payCode"    column="SETLE_MN_CODE" />
+	<result property="resvePc"    column="RESVE_PC" />
+	<result property="checkIn"    column="CHKIN_DATE" />
+	<result property="checkOut"   column="CHCKT_DATE" />
+	<result property="cancelAt"   column="CANCL_PHOTO" />
+	<result property="fUpdateDay" column="FRST_UPDDE" />
+	<result property="lUpdateDay" column="LAST_UPDDE" />
+	<result property="fUpdateId"  column="FRST_UPDT_ID" />	
+	<result property="lUpdateId"  column="LAST_UPDT_ID" />					
+		
+		
+	</resultMap> 
+
+
+
+
+	<select id="sltOne"  resultMap="resve">
+	   SELECT 
+			  RESVE_NO	 
+			, CSTMR_NO	 
+			, RUM_NO	 
+			, SETLEDE	 
+			, SETLE_MN_CODE	 
+			, RESVE_PC	 
+			, CHKIN_DATE	 
+			, CHCKT_DATE	 
+			, CANCL_AT	 
+			, FRST_UPDDE	 
+			, LAST_UPDDE	 
+			, FRST_UPDT_ID	 
+			, LAST_UPDT_ID	
+	   FROM   RESVE
+	   WHERE  RESVE_NO=#{resveNo} 
+	</select>
+
+	<!-- <resultMap type="#modelname" id="YourResultSet">
+		<id property="param1" column="columnname1" />
+		<result property="param2" column="columnname2" />
+		<result property="param3" column="columnname3" />
+	</resultMap> -->
+
+	<insert id="insert" parameterType="ResveDTO">
+	
+		INSERT INTO RESVE(
+			   RESVE_NO
+			 , CSTMR_NO
+			 , RUM_NO
+			 , SETLEDE
+			 , SETLE_MN_CODE
+			 , RESVE_PC
+			 , CHKIN_DATE
+			 , CHCKT_DATE
+			 , CANCL_AT
+			 , FRST_UPDDE
+			 , LAST_UPDDE
+			 , FRST_UPDT_ID
+			 , LAST_UPDT_ID )
+		VALUES (
+			   #{resveNo}
+			 , #{custNo}
+			 , #{rumNo}
+			 , #{payDay}
+			 , #{payCode}
+			 , #{resvePc}
+			 , #{checkIn}
+			 , #{checkOut}
+			 , #{cancelAt}
+			 , #{fUpdateDay}
+			 , #{lUpdateDay}
+			 , #{fUpdateId}
+			 , #{lUpdateId} )
+	</insert>
+
+	<update id="cancel" parameterType="ResveDTO">
+		UPDATE RESVE SET
+			   CSTMR_NO		 = #{custNo}
+			 , RUM_NO        = #{rumNo}
+			 , SETLEDE		 = #{payDay}
+			 , SETLE_MN_CODE = #{payCode}
+			 , RESVE_PC      = #{resvePc}
+			 , CHKIN_DATE	 = #{checkIn}
+			 , CHCKT_DATE	 = #{checkOut}
+			 , CANCL_AT		 = #{cancelAt}
+			 , FRST_UPDDE	 = #{fUpdateDay}
+			 , LAST_UPDDE	 = #{lUpdateDay}
+			 , FRST_UPDT_ID	 = #{fUpdateId}
+			 , LAST_UPDT_ID	 = #{lUpdateId}
+		 WHERE RESVE_NO = #{resveNo}
+	</update>
+
+	<delete id="delete" >
+		DELETE FROM RESVE WHERE
+		RESVE_NO = #{resveNo}
+	</delete>
+
+</mapper>
+

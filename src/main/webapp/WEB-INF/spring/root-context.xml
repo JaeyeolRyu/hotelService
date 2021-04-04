@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url"
+			value="jdbc:oracle:thin:@localhost:1521:XE" />
+		<property name="username" value="hotel" />
+		<property name="password" value="123456" />
+	</bean>
+
+	<!-- sqlSessionFactory -->
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!--mybatis설정 파일 -->
+		<property name="configLocation" value="classpath:/sql-map-config.xml" />
+		<!-- mapper 위지 지정 -->
+		<property name="mapperLocations" value="classpath:/mappings/*.xml" />
+		<!-- 트랜잭션 관리 -->
+		<property name="transactionFactory">
+			<bean class="org.mybatis.spring.transaction.SpringManagedTransactionFactory" />
+		</property>
+	</bean>
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+
+	<!-- DAO 등록 (DAO interface 위치) -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.sprHotelMbts.projectT3" />
+	</bean>
+
+	<!-- 트랜잭션 매니저 bean 등록 -->
+	<bean id="transactionManager"
+	class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- Annotation 기반의 트랜잭션 사용 -->
+	<context:annotation-config />
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+	<!--  Annotation기반의 Component Scan -->
+	<context:component-scan base-package="com.sprHotelMbts.projectT3" />
+
+	<!-- 회원가입 메일 인증 -->
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+		<property name="host" value="smtp.gmail.com" /> 
+		<property name="port" value="587" /> 
+		<property name="username" value="win10040127@gmail.com" /> 
+		<property name="password" value="skekgp8982!" /> 
+		<property name="javaMailProperties"> 
+			<props> 
+				<prop key="mail.smtp.auth">true</prop> 
+				<prop key="mail.smtp.starttls.enable">true</prop> 
+			</props> 
+		</property> 
+	</bean>
+	<bean id="mailService" class="com.sprHotelMbts.projectT3.cust.MailServiceImpl">
+		<property name="javaMailSender" ref="javaMailSender" />
+	</bean>
+
+</beans>

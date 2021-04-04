@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sprHotelMbts.projectT3.room.IRoomMEBC">
+
+	<resultMap type = "roomDto" id = "room">
+		<result property="roomNo" column="RUM_NO" />
+		<result property="hotelNo" column="HOTEL_NO" />
+		<result property="roomNm" column="RUM_NM" /> 
+		<result property="roomPc" column="RUM_PC" />
+		<result property="rHeadCount" column="RUM_NMPR" />
+		<result property="roomPhoto" column="RUM_PHOTO" />
+		<result property="roomSize" column="RUM_MG" />
+		<result property="sCount" column="RESVE_CO" />
+	</resultMap>
+	
+	<select id="sltOne" resultType="roomDto" resultMap="room" >
+		SELECT * FROM RUM WHERE RUM_NO = #{roomNo}
+	</select>
+	
+	<insert id="insert" parameterType="roomDto">
+		INSERT INTO RUM ( RUM_NO, HOTEL_NO, RUM_NM, RUM_PC, RUM_NMPR, RUM_PHOTO, RUM_MG, RESVE_CO )
+		VALUES( #{roomNo}, #{hotelNo}, #{roomNm}, #{roomPc}, #{rHeadCount}, #{roomPhoto}, #{roomSize} ,#{sCount})
+	</insert>
+	
+	<update id="update" parameterType="roomDto">
+		UPDATE RUM 
+		SET 
+	     HOTEL_NO 	= #{hotelNo}
+	    ,RUM_NM 	= #{roomNm}
+	    ,RUM_PC 	= #{roomPc}
+	    ,RUM_NMPR 	= #{rHeadCount}
+	    ,RUM_PHOTO = #{roomPhoto}
+	    ,RUM_MG 	= #{roomSize}
+	    ,RESVE_CO	= #{sCount}
+		WHERE RUM_NO = #{roomNo}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM RUM 
+		WHERE RUM_NO = #{roomNo}
+	</delete>
+	
+</mapper>
+

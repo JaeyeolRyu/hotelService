@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+			<typeAlias type="com.sprHotelMbts.projectT3.roomOptn.RoomOptnJoinDTO" alias="roomOptnJoinDto"></typeAlias>
+			<typeAlias type="com.sprHotelMbts.projectT3.hotel.HotelDTO" alias="hotelDto"></typeAlias>
+			<typeAlias type="com.sprHotelMbts.projectT3.hotel.HotelEvlDTO" alias="hotelEvlDto"></typeAlias>
+			<typeAlias type="com.sprHotelMbts.projectT3.hotelOptn.HotelOptnDTO" alias="hotelOptnDto"></typeAlias>
+			<typeAlias type="com.sprHotelMbts.projectT3.room.RoomDTO" alias="roomDto"></typeAlias>
+			<typeAlias type="com.sprHotelMbts.projectT3.roomOptn.RoomOptnDTO" alias="roomOptnDto"></typeAlias>
+			<typeAlias type="com.sprHotelMbts.projectT3.reservation.ResveDTO" alias="resveDto"></typeAlias>
+			<typeAlias type="com.sprHotelMbts.projectT3.reservation.ResveListDTO" alias="resveListDto"></typeAlias>
+			<typeAlias type="com.sprHotelMbts.projectT3.hotPlace.HotDTO" alias="hotDto"></typeAlias>
+			<typeAlias type="com.sprHotelMbts.projectT3.cust.CustDTO" alias="custDto"></typeAlias>
+			<typeAlias type="com.sprHotelMbts.projectT3.review.EvlDTO" alias="evlDto"></typeAlias>
+			<typeAlias type="com.sprHotelMbts.projectT3.review.AdEvlDTO" alias="adEvlDto"></typeAlias>
+	</typeAliases>
+
+</configuration>

@@ -1,0 +1,134 @@
+ CREATE TABLE "HOTEL"."RUM_OPTN" 
+   (	"RUM_NO" VARCHAR2(9 BYTE), 
+	"RUM_OPTN_NO" VARCHAR2(4 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+REM INSERTING into HOTEL.RUM_OPTN
+SET DEFINE OFF;
+Insert into HOTEL.RUM_OPTN (RUM_NO,RUM_OPTN_NO) values ('000000001','0401');
+Insert into HOTEL.RUM_OPTN (RUM_NO,RUM_OPTN_NO) values ('000000001','0406');
+Insert into HOTEL.RUM_OPTN (RUM_NO,RUM_OPTN_NO) values ('000000002','0417');
+Insert into HOTEL.RUM_OPTN (RUM_NO,RUM_OPTN_NO) values ('000000002','0423');
+Insert into HOTEL.RUM_OPTN (RUM_NO,RUM_OPTN_NO) values ('000000003','0405');
+Insert into HOTEL.RUM_OPTN (RUM_NO,RUM_OPTN_NO) values ('000000015','0415');
+Insert into HOTEL.RUM_OPTN (RUM_NO,RUM_OPTN_NO) values ('000000013','0417');
+Insert into HOTEL.RUM_OPTN (RUM_NO,RUM_OPTN_NO) values ('000000004','0409');
+Insert into HOTEL.RUM_OPTN (RUM_NO,RUM_OPTN_NO) values ('000000004','0417');
+Insert into HOTEL.RUM_OPTN (RUM_NO,RUM_OPTN_NO) values ('000000004','0418');
+Insert into HOTEL.RUM_OPTN (RUM_NO,RUM_OPTN_NO) values ('000000004','0420');
+--------------------------------------------------------
+--  DDL for Index SYS_C008442
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "HOTEL"."SYS_C008442" ON "HOTEL"."RUM_OPTN" ("RUM_NO", "RUM_OPTN_NO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  Constraints for Table RUM_OPTN
+--------------------------------------------------------
+
+  ALTER TABLE "HOTEL"."RUM_OPTN" ADD PRIMARY KEY ("RUM_NO", "RUM_OPTN_NO")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "HOTEL"."RUM_OPTN" MODIFY ("RUM_OPTN_NO" NOT NULL ENABLE);
+  ALTER TABLE "HOTEL"."RUM_OPTN" MODIFY ("RUM_NO" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Ref Constraints for Table RUM_OPTN
+--------------------------------------------------------
+
+  ALTER TABLE "HOTEL"."RUM_OPTN" ADD FOREIGN KEY ("RUM_NO")
+	  REFERENCES "HOTEL"."RUM" ("RUM_NO") ENABLE;
+ 
+ 
+ 
+ 
+ 
+ -------------------------------------------------------
+ 
+ 	
+insert into CMMN_CODE values ('0401','세면도구');
+insert into CMMN_CODE values ('0402','목욕가운');
+insert into CMMN_CODE values ('0403','안전금고');
+insert into CMMN_CODE values ('0404','비데');
+insert into CMMN_CODE values ('0405','화장실');
+insert into CMMN_CODE values ('0406','소파');
+insert into CMMN_CODE values ('0407','욕조');
+insert into CMMN_CODE values ('0408','타월');
+insert into CMMN_CODE values ('0409','업무용책상');
+insert into CMMN_CODE values ('0410','TV');
+insert into CMMN_CODE values ('0411','슬리퍼');
+insert into CMMN_CODE values ('0412','냉장고');
+insert into CMMN_CODE values ('0413','전화기');
+insert into CMMN_CODE values ('0414','커피메이커');
+insert into CMMN_CODE values ('0415','다리미');
+insert into CMMN_CODE values ('0416','난방시설');
+insert into CMMN_CODE values ('0417','헤어드라이어');
+insert into CMMN_CODE values ('0418','전기주전자');
+insert into CMMN_CODE values ('0419','알람시계');
+insert into CMMN_CODE values ('0420','옷장');
+insert into CMMN_CODE values ('0421','에어컨');
+insert into CMMN_CODE values ('0422','식탁');
+insert into CMMN_CODE values ('0423','보드게임');
+insert into CMMN_CODE values ('0424','공기청정기');
+insert into CMMN_CODE values ('0425','화장지');
+commit;
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	----------------------------
+ 	var str="";
+ 	var tdArr = new Array();
+ 	
+ 	var tr = $(this);
+ 	var td = tr.children();
+ 	
+ 	td.each(function(i){
+ 		tdArr.push(td.eq(i).text());
+ 	});
+ 	
+ 	no = td.eq(1).text();
+ 	var name = td.eq(2).text();
+ 	var photo = td.eq(0).text();
+ 	var address= td.eq(3).text();	
+ 	
+ 	 $('#no').val(no);
+ 	 $('#photo').val(photo);
+ 	 $('#nm').val(name);
+ 	 $('#address').val(address);
+ 	---------------------------------
+ 	$(document).ready(function(){
+
+	$('.list').click(function(){
+		
+	  	var str=""
+	 	var tdArr = new Array();
+	 	
+	 	var tr = $(this);
+	 	var td = tr.children();
+	 	
+	 	td.each(function(i){
+	 		tdArr.push(td.eq(i).text());
+	 	});
+	 	
+	 	var no      = td.eq(0).text();
+	 	var name 	= td.eq(1).text();
+	 	var address = td.eq(2).text();
+	 	var tel 	= td.eq(3).text();
+	 	
+	 	$('#hotelNo').val(no);
+	 	$('#hotelNm').val(name);
+	 	$('#hotelAddress').val(address);
+	 	$('#hotelTel').val(tel);
+	 	
+		alert(no + name + address + tel);
+	    });
+});

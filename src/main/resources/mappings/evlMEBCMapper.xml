@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.sprHotelMbts.projectT3.review.IEvlMEBC">
+	
+	<select id="sltOne" resultMap="adEvl">
+		SELECT E.EVL_NO, H.HOTEL_NM, C.CSTMR_NM, E.EVL_SCORE, E.EVL_CN  
+				 FROM   EVL E
+				 JOIN   HOTEL H 
+				 ON	    E.HOTEL_NO = H.HOTEL_NO
+				 JOIN   CSTMR C
+				 ON	    E.CSTMR_NO = C.CSTMR_NO 
+				 WHERE  E.EVL_NO = #{evlNo}
+	</select>
+	
+	<select id="sltOneUpdate" resultMap="evl">
+		SELECT * 
+		FROM   EVL
+		WHERE  EVL_NO = #{evlNo}
+	</select>
+	
+	<resultMap type="evlDto" id="evl">	
+		<result property="evlNo" column="EVL_NO" />
+		<result property="hotelNo" column="HOTEL_NO" />
+		<result property="custNo" column="CSTMR_NO" />
+		<result property="evlScore" column="EVL_SCORE" />
+		<result property="evlContent" column="EVL_CN" />
+	</resultMap> 
+	
+	<resultMap type="adEvlDto" id="adEvl">	
+		<result property="evlNo" column="EVL_NO" />
+		<result property="hotelName" column="HOTEL_NM" />
+		<result property="custName" column="CSTMR_NM" />
+		<result property="evlScore" column="EVL_SCORE" />
+		<result property="evlContent" column="EVL_CN" />
+	</resultMap> 
+	
+
+	<insert id="insert" parameterType="evlDto">
+		INSERT INTO EVL (EVL_NO, HOTEL_NO, CSTMR_NO, EVL_SCORE, EVL_CN)
+		VALUES( #{evlNo}, #{hotelNo}, #{custNo}, #{evlScore}, #{evlContent})
+	</insert>
+	
+	<update id="update" parameterType="evlDto">
+		UPDATE EVL
+		SET 
+		EVL_CN=#{evlContent}, EVL_SCORE=#{evlScore}
+		WHERE
+		EVL_NO = #{evlNo}
+	</update>
+
+	<delete id="delete" parameterType="String">
+		DELETE FROM EVL 
+		WHERE EVL_NO = #{evlNo}
+	</delete>
+
+</mapper>

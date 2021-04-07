@@ -198,7 +198,6 @@ public class CustSVCImpl implements ICustSVC{
 			
 //			model.addAttribute("LOGIN", "비밀번호가 맞지 않습니다. 다시 한번 확인해주세요.");
 			session.setAttribute("LOGIN", "비밀번호가 맞지 않습니다. 다시 한번 확인해주세요.");
-			System.out.println("비번틀렷다");
 			
 			res = "비밀번호가 맞지 않습니다. 다시 한번 확인해주세요.";
 			return res; // 로그인페이지
@@ -207,7 +206,6 @@ public class CustSVCImpl implements ICustSVC{
 		if( dto.getCustWithdraw() == 'Y') {
 //			model.addAttribute("LOGIN", "이미 탈퇴한 회원입니다.");
 			session.setAttribute("LOGIN", "이미 탈퇴한 회원입니다.");
-			System.out.println("손절한사람");
 			
 			res = "이미 탈퇴한 회원입니다.";
 			

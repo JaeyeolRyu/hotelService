@@ -26,8 +26,6 @@ public class CustSVCImpl implements ICustSVC{
 
 		CustDTO dto = custMebc.sltOneNo(custNo);
 
-		System.out.println(dto.toString());
-		
 		model.addAttribute("CUSTDTO", dto);
 		
 		return dto;      
@@ -45,7 +43,7 @@ public class CustSVCImpl implements ICustSVC{
 	
 		String serialNo = custQebc.serialNoMbr();
 		
-		System.out.println("시리얼번호 : " + serialNo);
+//		System.out.println("시리얼번호 : " + serialNo);
 		dto.setCustNo(serialNo);
 		
 		custMebc.insert(dto);
@@ -123,8 +121,6 @@ public class CustSVCImpl implements ICustSVC{
 
 		custMebc.cancel(custNo);
 		
-		System.out.println("cancel 쪽");
-		
 		return "redirect:/custLogout";
 	}
 	
@@ -142,9 +138,9 @@ public class CustSVCImpl implements ICustSVC{
 		
 		List<CustDTO> list = new ArrayList<CustDTO>();
 		
-		System.out.println("div 값 : " + div);
-		System.out.println("value 값 : " + value);
-		System.out.println("page 값 : " + pageNo);
+//		System.out.println("div 값 : " + div);
+//		System.out.println("value 값 : " + value);
+//		System.out.println("page 값 : " + pageNo);
 		
 		
 		if ( div.equals("name")) {
@@ -153,7 +149,7 @@ public class CustSVCImpl implements ICustSVC{
 			list = custQebc.sltEmail(value, (pageNo-1) * MAXCNT + 1, MAXCNT + 1);
 		}
 
-		System.out.println("리스트사이즈" + list.size());
+//		System.out.println("리스트사이즈" + list.size());
 		
 		if ( pageNo == 1 ) {
 			model.addAttribute("PREV", false);
@@ -212,7 +208,7 @@ public class CustSVCImpl implements ICustSVC{
 			return res; // 로그인페이지
 		}
 		
-		System.out.println(dto.getCustWithdraw());
+//		System.out.println(dto.getCustWithdraw());
 		
 		
 		String custNo    = dto.getCustNo();
@@ -227,7 +223,7 @@ public class CustSVCImpl implements ICustSVC{
 		}
 		
 		res = "";
-		System.out.println("관리자여부" + custAdmin);
+//		System.out.println("관리자여부" + custAdmin);
 		
 		return res; //메인 페이지
 	}	
@@ -235,8 +231,8 @@ public class CustSVCImpl implements ICustSVC{
 	@Override	// 이메일(ID) 찾기
 	public String emailFind(String name, String tel, Model model) {
 		
-		System.out.println("이름 : " + name);
-		System.out.println("전화번호 : " + tel);
+//		System.out.println("이름 : " + name);
+//		System.out.println("전화번호 : " + tel);
 		
 		CustDTO dto = custQebc.sltOneFind( name, tel );
 		
@@ -285,7 +281,7 @@ public class CustSVCImpl implements ICustSVC{
 	@Override	// 이메일중복확인
 	public CustDTO emailCheck(String custEmail) {
 		
-		System.out.println(custEmail);
+//		System.out.println(custEmail);
 		CustDTO dto = custQebc.sltOneEmail(custEmail);
 		
 		if( dto == null) {

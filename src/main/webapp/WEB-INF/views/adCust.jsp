@@ -111,8 +111,6 @@
 <script src="  js/plugins.js"></script>
 <script src="  js/main.js"></script>
 
-
-
 <script type="text/javascript">
 		 
 var no
@@ -133,7 +131,6 @@ $(document).ready(function(){
 	 	no = no.trim();
  		var url = "custSltDetail";	
 
- 		
  		 $.getJSON(url, {
  			 
 			 "custNo" : no			
@@ -189,10 +186,6 @@ $(document).ready(function(){
 	
 });
 	
-
-
-
-
 </script>
 </head>
 <body>
@@ -292,8 +285,6 @@ $(document).ready(function(){
         <!-- Header End -->
   
 
-    
-
         <!-- slider Area Start-->
 
         <!-- Favourite Places Start -->
@@ -364,8 +355,6 @@ $(document).ready(function(){
 			</div>
 	</form>
 	
-
- 
 <form method = "post" id="form2" action = "custInsert?div=ad" >
 <table border="1" align="center" width="90%" >
 	<tr>
@@ -388,8 +377,6 @@ $(document).ready(function(){
 		<td>전화번호</td>
 		<td style="background-color:#e0e0e0;"><input type = "text" width="777px" style=" background-color:#e0e0e0;   border: none;" id = "custTel" name = "custTel"></td>
 	</tr>
-
-
 
 </table>
 <div align="right" style="margin-right: 50px">

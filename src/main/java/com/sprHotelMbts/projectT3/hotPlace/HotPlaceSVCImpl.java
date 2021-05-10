@@ -58,26 +58,11 @@ public class HotPlaceSVCImpl implements IHotPlaceSVC {
 
 	@Override
 	public String insert(HotDTO hotDto, Model model,MultipartFile file) {
-		
-//		String hotNo = hotDto.getHotNo();
-//		
-//		HotDTO htoCDto = hotMebc.sltOne(hotNo);
-//		
-//		if(htoCDto == null) {
-//			
-//		}
-//		else {
-//			return "a";
-//		}
-		
-		 System.out.println("파일 이름 : " + file.getOriginalFilename());
-		 System.out.println("파일 크기 : " + file.getSize());
-		  
+
 		String newFile=hotDto.getHotNm()+".jpg";    
-		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		try(
 		      
-		      FileOutputStream fos = new FileOutputStream("C:\\2005LDK\\WS\\projectT3\\src\\main\\webapp\\resources\\img\\" + newFile);
+		      FileOutputStream fos = new FileOutputStream("C:\\2005RJY\\WS\\projectT3\\src\\main\\webapp\\resources\\img\\" + newFile);
 				    		
 		      InputStream is = file.getInputStream();
 				    		
@@ -118,7 +103,6 @@ public class HotPlaceSVCImpl implements IHotPlaceSVC {
 		else {
 			
 		}	
-		System.out.println(hotNo);
 		String result="가가가가";
 		String test = "111111";
 		JSONObject jsonObj = new JSONObject();
@@ -128,10 +112,8 @@ public class HotPlaceSVCImpl implements IHotPlaceSVC {
 		hotMebc.delete(hotNo);
 		
 		String jsonOut = jsonObj.toString();
-		System.out.println("====" + jsonOut);
 		
 		return jsonOut;
-//		return "hotMgPage";
 	}
 
 

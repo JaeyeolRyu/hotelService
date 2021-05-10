@@ -45,12 +45,8 @@ public class JsonCtrl {
 	@ResponseBody
 	public String hotelRow(@ModelAttribute("hotelNo") String hotelNo, Model model ) throws Exception
 	{
-		System.out.println("여기는 호텔 JSON");
-		System.out.println(hotelNo);
 		HotelDTO dto = hotelSvc.sltOne(model, hotelNo);
-		System.out.println("1");
 		JSONObject jsonObj = new JSONObject();
-		System.out.println("2");
 		jsonObj.put("NO", dto.getHotelNo());
 		jsonObj.put("NM", dto.getHotelNm());
 		jsonObj.put("ADDRESS", dto.getHotelAddress());
@@ -59,7 +55,6 @@ public class JsonCtrl {
 		jsonObj.put("HOMEPAGE", dto.getHotelHomepage());
 		jsonObj.put("PHOTO", dto.getHotelPhoto());
 		String jsonOut = jsonObj.toString();
-		System.out.println("==1" + jsonOut);
 //		model.addAttribute("HOTELNO",dto.getHotelNo());
 		
 		return jsonOut;
@@ -69,8 +64,6 @@ public class JsonCtrl {
 	@ResponseBody
 	public String roomRow(@ModelAttribute("roomNo") String roomNo ) throws Exception
 	{
-		System.out.println("여기는 객실 JSON");
-		System.out.println(roomNo + "  eeeeeeeeeeeeeeee");
 		RoomDTO dto = roomMebc.sltOne(roomNo);
 		JSONObject jsonObj = new JSONObject();
 		
@@ -85,7 +78,6 @@ public class JsonCtrl {
 		//객실수
 		
 		String jsonOut = jsonObj.toString();
-		System.out.println("====" + jsonOut);
 		
 		return jsonOut;
 	}	
@@ -96,11 +88,7 @@ public class JsonCtrl {
 	public void hotelRowDelete(@ModelAttribute("hotelNo") String hotelNo, Model model ) throws Exception
 	{
 		
-		System.out.println(hotelNo);
-		System.out.println("여기는 호텔삭제 JSON 시작");
 		hotelSvc.delete(model, hotelNo);
-		System.out.println("여기는 호텔삭제 JSON 종료");
-		
 		
 		return;
 	}
@@ -109,10 +97,7 @@ public class JsonCtrl {
 	@ResponseBody
 	public void RoomRowDelete(@ModelAttribute("roomNo") String roomNo , Model model) throws Exception
 	{
-		System.out.println("여기는 객실 삭제 JSON");
-		System.out.println(roomNo);
 		roomSvc.delete(model, roomNo);
-		System.out.println("여기는 객실 삭제 JSON 종료");
 		return;
 	}
 	
@@ -120,7 +105,6 @@ public class JsonCtrl {
 	@ResponseBody
 	public String hotelRowUpdate(@ModelAttribute("hotelNo") String hotelNo ) throws Exception
 	{
-		System.out.println("여기는 호텔 업데이트 JSON");
 		HotelDTO dto = hotelMebc.hotelSltOneMEBC(hotelNo);
 
 		JSONObject jsonObj = new JSONObject();
@@ -134,7 +118,6 @@ public class JsonCtrl {
 		jsonObj.put("PHOTO", dto.getHotelPhoto());
 		
 		String jsonOut = jsonObj.toString();
-		System.out.println("====" + jsonOut);
 		
 		return jsonOut;
 
@@ -145,12 +128,9 @@ public class JsonCtrl {
 	public String sltMulti(@ModelAttribute("hotelNo") String hotelNo, Model model, @ModelAttribute("div") 
 	String div, @ModelAttribute("value") String value, @ModelAttribute("PAGENO") int page)
 	{	
-		System.out.println(hotelNo);
-		System.out.println("room 다건조회 컨트롤러 진입!");
 		roomSvc.adSltMulti(hotelNo, model, div, value, page);
 		
 		model.addAttribute("PAGENO", page);
-		System.out.println("room 다건조회 컨트롤러 탈출직전!");
 		return "AdRoom";
 	}
 	
@@ -159,13 +139,10 @@ public class JsonCtrl {
 	public String roomAdSltMulti(String hotelNo, Model model, @ModelAttribute("div") 
 	String div, @ModelAttribute("value") String value, @ModelAttribute("PAGENO") int page)
 	{	
-		System.out.println(hotelNo);
-		System.out.println("호텔에서 room버튼 선택시 다건조회 컨트롤러 진입!");
 		roomSvc.adSltMulti(hotelNo, model, div, value, page);
 		
 		model.addAttribute("PAGENO", page);
 		model.addAttribute("hotelNo",hotelNo);
-		System.out.println("호텔에서 room버튼 선택시 다건조회 컨트롤러 탈출직전!");
 		return "AdRoom";
 	}
 	
@@ -173,34 +150,22 @@ public class JsonCtrl {
 @ResponseBody
 	public String hotelOptn(@ModelAttribute("hotelNo") String hotelNo, Model model ) throws Exception	{	
 		
-		System.out.println("호텔에서 호텔옵션버튼 선택시 다건조회 컨트롤러 진입!");
-		System.out.println("여기는 왜 안 나올까?");
-		System.out.println("호텔번호  -> " + hotelNo);
-		
 		HotelOptnDTO hotelOptnDto = new HotelOptnDTO();
 		
 		
 		String a = hotelOptnSvc.sltAll(model, hotelNo);
-		System.out.println(a + "aaaaaaaaaaaa");
 		model.addAttribute("hotelNo", hotelNo);
-		System.out.println("tostring " + hotelOptnDto.toString());
-		System.out.println("호텔에서 room버튼 선택시 다건조회 컨트롤러 탈출직전!");
 		return a;
 	}
 
 @RequestMapping(value = "jsonRoomOptn1", produces = "application/text;charset=UTF-8")
 @ResponseBody
 	public String roomOptn(@ModelAttribute("roomNo") String roomNo, Model model ) throws Exception	{	
-		System.out.println("여기는 객실옵션 JSON");
 		RoomOptnDTO roomOptnDto = new RoomOptnDTO();
-		
 		
 		String a = roomOptnSvc.sltAll(model, roomNo);
 		
-		System.out.println(a + "aaaaaaaaaaaa");
 		model.addAttribute("hotelNo", roomNo);
-		System.out.println("tostring " + roomOptnDto.toString());
-		System.out.println("객실에서 옵션버튼 선택시 다건조회 컨트롤러 탈출직전!");
 		return a;
 	}
 }

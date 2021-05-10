@@ -25,7 +25,7 @@ public class CustCTRL {
 
 		return "redirect:/main.jsp";
 	}*/
-
+	
 	@RequestMapping("custSltOne") // 마이페이지 상세정보 조회,수정용 sltOne
 	public String sltOne(@SessionAttribute("CUSTNO") String custNo, Model model) {
 	
@@ -37,9 +37,7 @@ public class CustCTRL {
 
 	@RequestMapping("custInsert")
 	public String insert(CustDTO dto, @ModelAttribute("div")String div, Model model) {
-		System.out.println("인서트 컨트롤러 들어옴");
 		String viewPage = null;
-		System.out.println("div값 : " + div);
 		
 		if(div.equals("ad")) {
 			viewPage = custSvc.adInsert(dto, model);
@@ -65,7 +63,6 @@ public class CustCTRL {
 	public String adUpdate(CustDTO dto, Model model) {
 
 		
-		System.out.println("email값" + dto.getCustEmail());
 		String viewPage = custSvc.adUpdate(dto, model);
 
 		return viewPage;
@@ -99,7 +96,7 @@ public class CustCTRL {
 	public String custDetail( @ModelAttribute("custNo") String custNo, Model model ) throws Exception
 	{
 		
-		System.out.println(custNo);
+
 		CustDTO dto = custSvc.sltOne(custNo, model);
 
 		JSONObject jsonObj = new JSONObject();
@@ -111,7 +108,6 @@ public class CustCTRL {
 		jsonObj.put("PW", dto.getCustPw());
 		
 		String jsonOut = jsonObj.toString();
-		System.out.println("==" + jsonOut);
 
 		
 		return jsonOut;
@@ -177,14 +173,11 @@ public class CustCTRL {
 	@RequestMapping(value = "custPwUpdate")
 	@ResponseBody
 	public String pwUpdate(@SessionAttribute("CUSTNO")String custNo, @ModelAttribute("newPw") String newPw, Model model) {
-		System.out.println(custNo);
 		CustDTO dto = custSvc.sltOne(custNo, model);
 		dto.setCustPw(newPw);
 		
-		System.out.println(dto.toString());
 		
 		String viewPage = custSvc.pwUpdate(dto, model);
-		System.out.println(viewPage);
 		
 		return viewPage;
 	}
@@ -211,8 +204,6 @@ public class CustCTRL {
 		
 		String pw = custSvc.pwFind(custEmail, model);
 		
-		System.out.println(pw);
-		
 		map.put("PW", pw);
 		
 		return map;
@@ -222,9 +213,7 @@ public class CustCTRL {
 	@RequestMapping(value = "emailCheck.do", produces = "application/text;charset=UTF-8")
 	@ResponseBody
 	public String emailCheck(@ModelAttribute("custEmail") String custEmail) throws Exception {
-		System.out.println(custEmail);
 		CustDTO dto = custSvc.emailCheck(custEmail);
-		System.out.println(dto + "컨트롤러");
 		boolean result = false;
 		if (dto == null) {
 			result = true;
@@ -232,9 +221,7 @@ public class CustCTRL {
 
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("result", result);
-		System.out.println(result);
 		String jsonOut = jsonObj.toString();
-		System.out.println("====" + jsonOut);
 		return jsonOut;
 	}
 

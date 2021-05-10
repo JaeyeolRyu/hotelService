@@ -72,11 +72,7 @@ public class emailController {
 		
 		Map<String, Object> m = new HashMap<String, Object>();
 		m.put("AA", authCode);
-//		System.out.println(subject);
-//		System.out.println(sb);
-//		System.out.println("win10040127@gmail.com");
-//		System.out.println(userEmail);
-		
+
 		mailService.send(subject, sb.toString(), "win10040127@gmail.com", userEmail);
 		
 		

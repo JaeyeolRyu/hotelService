@@ -46,13 +46,6 @@ public class HotPlaceCTRL {
 		return viewPage;
 	}
 	
-
-	
-/*	@RequestMapping("hottestPage")
-	public String testPage() {
-		
-		return "index";
-	}*/
 	
 	@RequestMapping("hotinsert")
 	public String insert(Model model, HotDTO hotDto, @RequestParam("file") MultipartFile file,@ModelAttribute("PAGENO") int pageNo)throws Exception{
@@ -67,8 +60,6 @@ public class HotPlaceCTRL {
 	@RequestMapping("hotupdate")
 	public String update(Model model, HotDTO hotDto, @RequestParam("file") MultipartFile file)throws Exception{
 		
-
-		System.out.println("------"+hotDto.getPhoto());
 		hotPlaceSvc.update(hotDto, model);
 		
 		return "hotMgPage";
@@ -84,29 +75,4 @@ public class HotPlaceCTRL {
 		
 		return viewPage;
 	}
-	
-
-	
-	/*@RequestMapping(value="jsondelete.do", produces ="application/text;charset=UTF-8")
-	@ResponseBody      
-	public String test(@ModelAttribute("PAGENO")String pageNo,@ModelAttribute("VALUE") String value) throws Exception{
-		
-		
-		
-		System.out.println(value);
-		String result="가가가가";
-		String test = "컨트롤 갔다가 리턴";
-		
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("result", result);
-		jsonObj.put("test", test);
-	
-		String jsonOut = jsonObj.toString();
-		System.out.println("====" + jsonOut);
-		
-		return jsonOut;
-
-
-
-}*/
 }

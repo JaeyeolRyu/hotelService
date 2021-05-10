@@ -8,7 +8,5 @@ public interface IRoomOptnMEBC {
 	
 	void insert(RoomOptnDTO roomOptnDto);
 	
-//	void update(RoomOptnDTO roomOptnDto);
-	
 	int delete(@Param("roomNo") String roomNo, @Param("roomOptnNo") String roomOptnNo);
 }

@@ -43,7 +43,6 @@ public class CustSVCImpl implements ICustSVC{
 	
 		String serialNo = custQebc.serialNoMbr();
 		
-//		System.out.println("시리얼번호 : " + serialNo);
 		dto.setCustNo(serialNo);
 		
 		custMebc.insert(dto);
@@ -90,7 +89,6 @@ public class CustSVCImpl implements ICustSVC{
 		CustDTO custDto = custMebc.sltOneNo(dto.getCustNo());
 
 		
-		System.out.println(dto.getCustEmail());
 		custDto.setCustName(dto.getCustName());
 		custDto.setCustEmail(dto.getCustEmail());
 		custDto.setCustPw(dto.getCustPw());
@@ -138,10 +136,7 @@ public class CustSVCImpl implements ICustSVC{
 		
 		List<CustDTO> list = new ArrayList<CustDTO>();
 		
-//		System.out.println("div 값 : " + div);
-//		System.out.println("value 값 : " + value);
-//		System.out.println("page 값 : " + pageNo);
-		
+
 		
 		if ( div.equals("name")) {
 			list = custQebc.sltName(value, (pageNo-1) * MAXCNT + 1, MAXCNT + 1);
@@ -149,7 +144,6 @@ public class CustSVCImpl implements ICustSVC{
 			list = custQebc.sltEmail(value, (pageNo-1) * MAXCNT + 1, MAXCNT + 1);
 		}
 
-//		System.out.println("리스트사이즈" + list.size());
 		
 		if ( pageNo == 1 ) {
 			model.addAttribute("PREV", false);
@@ -208,12 +202,10 @@ public class CustSVCImpl implements ICustSVC{
 			return res; // 로그인페이지
 		}
 		
-//		System.out.println(dto.getCustWithdraw());
 		
 		
 		String custNo    = dto.getCustNo();
 		String custName  = dto.getCustName();
-		char custAdmin = dto.getCustAdmin();
 		
 		session.setAttribute("CUSTNO", custNo);
 		session.setAttribute("CUSTNAME", custName);
@@ -223,16 +215,12 @@ public class CustSVCImpl implements ICustSVC{
 		}
 		
 		res = "";
-//		System.out.println("관리자여부" + custAdmin);
 		
 		return res; //메인 페이지
 	}	
 
 	@Override	// 이메일(ID) 찾기
 	public String emailFind(String name, String tel, Model model) {
-		
-//		System.out.println("이름 : " + name);
-//		System.out.println("전화번호 : " + tel);
 		
 		CustDTO dto = custQebc.sltOneFind( name, tel );
 		
@@ -281,7 +269,6 @@ public class CustSVCImpl implements ICustSVC{
 	@Override	// 이메일중복확인
 	public CustDTO emailCheck(String custEmail) {
 		
-//		System.out.println(custEmail);
 		CustDTO dto = custQebc.sltOneEmail(custEmail);
 		
 		if( dto == null) {

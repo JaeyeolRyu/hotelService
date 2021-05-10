@@ -37,37 +37,19 @@ public class RoomSVCImpl implements IRoomSVC{
 
 	@Override
 	public String insert(Model model, RoomDTO roomDto, MultipartFile file) {
-		System.out.println("-----------------------------------------");
-		System.out.println("ROOM INSERT SVC 시작");
-		System.out.println("insert전 " + roomDto.getRoomNo());
 		
 		String roomNo = roomDto.getRoomNo();
 		//String roomNm = roomDto.getRoomNm();
 		if(roomNo == null)
 			roomNo = "0"; 
 		String serialNo1 = roomQebc.serialNo(roomDto.getHotelNo());
-		System.out.println(serialNo1 + "채번");
 		roomDto.setRoomNo(serialNo1);
-		System.out.println(serialNo1);
-		
-		System.out.println("파일 이름 : " + file.getOriginalFilename());
-
-	    System.out.println("파일 크기 : " + file.getSize());
-
 	  
 	String newFile=roomDto.getRoomNm()+".jpg";    
 
 	try(
 
-	      // 맥일 경우 
-
-	      //FileOutputStream fos = new FileOutputStream("/tmp/" + file.getOriginalFilename());
-
-	      // 윈도우일 경우
-
-	    		//C:\2005LDK\WS\projectT4\src\main\webapp\resources\img
-
-	      FileOutputStream fos = new FileOutputStream("C:\\2005LHW\\workspace\\projectT3\\src\\main\\webapp\\resources\\img\\" + newFile);
+	      FileOutputStream fos = new FileOutputStream("C:\\2005RJY\\workspace\\projectT3\\src\\main\\webapp\\resources\\img\\" + newFile);
 													
 	      InputStream is = file.getInputStream();
 
@@ -92,19 +74,13 @@ public class RoomSVCImpl implements IRoomSVC{
 
 	    roomDto.setRoomPhoto(newFile);
 		String hotelNo =  roomDto.getHotelNo();
-		System.out.println("INSERT전 DTO -> " + roomDto.toString());
 		roomMebc.insert(roomDto);
-		System.out.println("INSERT후 DTO -> " + roomDto.toString());
-		System.out.println("ROOM INSERT SVC 종료");
-//		model.addAttribute("hotelNo", roomDto.getHotelNo());
 		//div value page
 		return "redirect:/adSltMulti?hotelNo="+hotelNo+"&div=0&value=0&PAGENO=1";  
 	}
 
 	@Override
 	public String delete(Model model, String roomNo) { 
-		System.out.println("-----------------------------------------");
-		System.out.println("ROOM delete SVC 시작");
 		RoomDTO roomDto = roomMebc.sltOne(roomNo);
 		
 		if(roomDto == null)
@@ -114,40 +90,19 @@ public class RoomSVCImpl implements IRoomSVC{
 		}
 		
 		roomMebc.delete(roomNo);
-		System.out.println("ROOM delete SVC 종료");
 		return null;
 	}
 
 	@Override
 	public String update(Model model, RoomDTO roomDto, MultipartFile file) {
-		System.out.println("-----------------------------------------");
-		System.out.println("ROOM update SVC 시작");
-		System.out.println("SVC진입후"+ roomDto.toString());
 		String hotelNo = roomDto.getHotelNo();
-//		RoomDTO roomdto1 = roomMebc.sltOne(roomNo);
-//		
-//		if(roomdto1 == null)
-//		{
-//			
-//		}
-		System.out.println("파일 이름 : " + file.getOriginalFilename());
-
-	    System.out.println("파일 크기 : " + file.getSize());
 
 	  
-	String newFile=roomDto.getRoomNm()+".jpg";    
+		String newFile=roomDto.getRoomNm()+".jpg";    
 
 	try(
 
-	      // 맥일 경우 
-
-	      //FileOutputStream fos = new FileOutputStream("/tmp/" + file.getOriginalFilename());
-
-	      // 윈도우일 경우
-
-	      //C:\2005LDK\WS\projectT4\src\main\webapp\resources\img
-
-	      FileOutputStream fos = new FileOutputStream("C:\\2005LHW\\workspace\\projectT3\\src\\main\\webapp\\resources\\img\\" + newFile);
+	      FileOutputStream fos = new FileOutputStream("C:\\2005RJY\\workspace\\projectT3\\src\\main\\webapp\\resources\\img\\" + newFile);
 													
 	      InputStream is = file.getInputStream();
 
@@ -172,23 +127,12 @@ public class RoomSVCImpl implements IRoomSVC{
 
 	    roomDto.setRoomPhoto(newFile);
 		
-	    System.out.println("UPDATE전 DTO -> " + roomDto.toString());
 		roomMebc.update(roomDto);
-		System.out.println("UPDATE후 DTO -> " + roomDto.toString() );
-		System.out.println("ROOM update SVC 종료");
 		return "redirect:/adSltMulti?hotelNo="+hotelNo+"&div=0&value=0&PAGENO=1";  
 	}
 
 	@Override
 	public String adSltMulti(String hotelNo, Model model, String div, String value, int page) {
-		
-		System.out.println("-----------------------------------------");		
-		System.out.println("ROOM 관리자 다건조회 SVC 시작");
-		
-		System.out.println("hotelNo -> " + hotelNo);
-		System.out.println("value   -> " + value);
-		System.out.println("div     -> " + div);
-		System.out.println("page    -> " + page);
 		
 		try {
 			
@@ -214,10 +158,7 @@ public class RoomSVCImpl implements IRoomSVC{
 			
 			if(div.equals("0") || div.equals("Name"))
 			{
-				System.out.println("-" + hotelNo +"-" + value + "-" + start + "-" + cnt);
 				list = roomQebc.sltName(hotelNo, value, start, cnt);
-				System.out.println("여기?");
-				System.out.println(list.size());
 			}
 			else if(div.equals("All"))
 			{
@@ -250,14 +191,11 @@ public class RoomSVCImpl implements IRoomSVC{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		System.out.println("ROOM 관리자 다건조회 SVC 종료");
 		return null;
 	}
 
 	@Override
 	public String mbrSltMulti(Model model, String value, int page) {
-		System.out.println("-----------------------------------------");
-		System.out.println("ROOM 고객 다건조회 SVC 시작");
 		if(page == 0)
 		{
 			page =  1;
@@ -270,7 +208,7 @@ public class RoomSVCImpl implements IRoomSVC{
 		{
 			value = "%";
 		}
-			String hotelNo = "1";/////////////////////////////////호텔NO값 고쳐야해
+			String hotelNo = "1";
 			List<RoomDTO> roomList = roomQebc.sltName(hotelNo, value, start, cnt);
 			if(roomList.size() == 0)
 				return null;
@@ -293,20 +231,15 @@ public class RoomSVCImpl implements IRoomSVC{
 			model.addAttribute("NEXT",next);
 			model.addAttribute("ROOMLIST", roomList);
 			model.addAttribute("PAGENO", page);
-			System.out.println("ROOM 고객 다건조회 SVC 종료");
 		return null;
 	}
 
 	
 	@Override
 	public String sltCstRum(Model model, String roomNo, String custNo) {
-	System.out.println("컨트롤  "+custNo );
 		RoomDTO roomDto= roomMebc.sltOne(roomNo);
 		
-		
 		CustDTO custDto = custMebc.sltOneNo(custNo);
-//		System.out.println("컨트롤 dto  " +custDto.getCustName());
-		
 			
 		model.addAttribute("CUST", custDto);
 		model.addAttribute("ROOM",roomDto);

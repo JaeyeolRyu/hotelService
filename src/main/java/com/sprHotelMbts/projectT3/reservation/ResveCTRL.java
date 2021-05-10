@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sprHotelMbts.projectT3.cust.CustDTO;
 
-
-
-
 @Controller
 public class ResveCTRL {
 
@@ -25,14 +22,9 @@ public class ResveCTRL {
 	@RequestMapping("resveInsert") //결제
 	public String insert(Model model, ResveDTO resveDto, CustDTO custDto)throws Exception {
 		
-		System.out.println(custDto.getCustNo());
 		resveSvc.insert(model, resveDto,custDto);
 		return "redirect:/main";
 	}
-	
-	
-
-	
 	
 	@RequestMapping("resveSltMulti")
 	public String sltMulti(Model model,String value, @ModelAttribute("PAGENO") String pageNo)throws Exception {
@@ -45,7 +37,6 @@ public class ResveCTRL {
 	@RequestMapping("resveCancel")
 	public String cancel(Model model, @ModelAttribute("CUSTNO") String custNo, @ModelAttribute("RESVENO") String resveNo) throws Exception {
 		
-		System.out.println(custNo+"   "+ resveNo);
 		resveSvc.cancel(model, resveNo,custNo);
 		
 		return "redirect:/myResveList";

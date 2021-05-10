@@ -308,9 +308,6 @@ $(document).ready(function(){
        </div>
         <!-- Header End -->
 
-
-    
-
         <!-- slider Area Start-->
    
         <!-- Favourite Places Start -->

@@ -24,19 +24,10 @@ public class RoomOptnCtrl {
 	@RequestMapping("adRoomOptn")
 	public String adRoomOptn(@Param("roomOptn") String roomOptn, @Param("value") String value, @Param("PAGENO") String page, @Param("roomNo") String roomNo, Model model)
 	{
-		System.out.println("객실옵션 컨트롤러 시작");
 		model.addAttribute("roomNo", roomNo);
 		model.addAttribute("roomOptn", roomOptn);
 		return "AdRoomOptn";
 	}
-	
-//	@RequestMapping("roomOptnSltMulti")
-//	public String sltMulti(Model model, String roomNo)
-//	{
-//		String json = roomOptnSvc.sltAll(model, roomNo);
-//		System.out.println("+++" + json);
-//		return json;
-//	}
 	
 	@RequestMapping("roomOptnInsert")
 	public String insert(@Param("roomNo") String roomNo, @ModelAttribute("roomOptnNo") String roomOptnNo, Model model, HttpServletRequest request)
@@ -62,11 +53,6 @@ public class RoomOptnCtrl {
 	public Map<String, Object> delete(Model model, @ModelAttribute("roomNo") String roomNo, @ModelAttribute("roomOptnNo") String roomOptnNo )
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		System.out.println("delete 들어옴");
-		System.out.println("roomNo : " + roomNo);
-		System.out.println(roomOptnNo);
-		
 		String res = roomOptnSvc.delete(model, roomNo, roomOptnNo);
 		
 		map.put("RESULT", res);

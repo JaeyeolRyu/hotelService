@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class MailServiceImpl implements MailService {
 
-
 	// org.springframework.mail.javamail.JavaMailSender
 	@Autowired
 	private JavaMailSender javaMailSender;
@@ -27,7 +26,6 @@ public class MailServiceImpl implements MailService {
 	
 		MimeMessage message = javaMailSender.createMimeMessage();
 	
-		System.out.println("1234");
 		try {
 		// org.springframework.mail.javamail.MimeMessageHelper
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");

@@ -17,16 +17,9 @@ public class RoomCtrl {
 	
 	String viewPage;
 	
-/*	@RequestMapping(value = "/")
-	public String home() 
-	{
-		return "redirect:/main.jsp";
-	}*/
-	
 	@RequestMapping("AdRoom")
 	public String AdRoom()
 	{	
-		System.out.println("여기는 테스트jsp");
 		return "AdRoom";
 	}
 	
@@ -35,12 +28,8 @@ public class RoomCtrl {
 	public String sltMulti(@ModelAttribute("hotelNo") String hotelNo, Model model, @ModelAttribute("div") 
 	String div, @ModelAttribute("value") String value, @ModelAttribute("PAGENO") int page)
 	{	
-		System.out.println("-----------------------------------------");
-		System.out.println("여기 재열님께서 친히 행차하셨으나 해결못한 시스아웃" + hotelNo);
-		System.out.println("room 다건조회 컨트롤러 진입!");
 		viewPage = roomSvc.adSltMulti(hotelNo, model, div, value, page);
 		model.addAttribute("PAGENO", page);
-		System.out.println("room 다건조회 컨트롤러 탈출직전!");
 		return "AdRoom";
 	}
 	
@@ -48,11 +37,7 @@ public class RoomCtrl {
 	//@RequestMapping("roomInsert")
 	public String insert( Model model, RoomDTO roomDto, @RequestParam("file") MultipartFile file)
 	{	
-		System.out.println("-----------------------------------------");
-		System.out.println("room Insert 컨트롤러 진입!@!");
-		System.out.println("roomInsert진입후 dto  -> " + roomDto.toString());
 		viewPage = roomSvc.insert(model, roomDto, file);
-		System.out.println("room Insert 컨트롤러 탈출직전!");
 		
 		return viewPage;
 	}
@@ -60,12 +45,7 @@ public class RoomCtrl {
 	@RequestMapping("roomUpdate")
 	public String update(@Param("roomNo") String roomNo, Model model, RoomDTO roomDto, @RequestParam("file") MultipartFile file)
 	{	
-		System.out.println(roomNo + "sssssssssss");
-		System.out.println("-----------------------------------------");
-		System.out.println("room update 컨트롤러 진입!");
-		System.out.println(roomDto.toString());
 		viewPage = roomSvc.update(model, roomDto, file);
-		System.out.println("room update 컨트롤러 탈출직전!");
 		
 		return viewPage;
 	}
@@ -73,12 +53,7 @@ public class RoomCtrl {
 	@RequestMapping("roomDelete")
 	public String delete(Model model, String roomNo)
 	{	
-		System.out.println("-----------------------------------------");
-		System.out.println("room delete 컨트롤러 진입!");
-		
 		viewPage = roomSvc.delete(model, roomNo);
-		
-		System.out.println("room delete 컨트롤러 탈출직전!");
 		
 		return "AdRoom";
 	}

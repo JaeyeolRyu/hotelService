@@ -68,10 +68,7 @@ public class EvlCTRL {
 			pageNo2 = Integer.parseInt(pageNo);
 		}
 			
-		
-		
 		String viewPage = evlSvc.sltMulti(div, value, pageNo2, model);
-		
 		
 		return viewPage;
 	}
@@ -116,8 +113,6 @@ public class EvlCTRL {
 	@RequestMapping("evlUpdateView")
 	public String evlUpdateView(@ModelAttribute("evlNo")String evlNo, Model model) {
 		
-		System.out.println("업데이트 뷰 들어옴. evlNo 값 : " + evlNo);
-		
 		AdEvlDTO dto = evlSvc.sltOne(evlNo, model);
 		
 		model.addAttribute("EVLDTO", dto ) ;		
@@ -129,9 +124,6 @@ public class EvlCTRL {
 	@RequestMapping("evlInsertView")
 	public String sltInsert(@SessionAttribute("CUSTNO") String custNo, @ModelAttribute("hotelName") String hotelName, @ModelAttribute("hotelNo")String hotelNo ,Model model) {
 
-		System.out.println(custNo+"  "+hotelName+"  "+hotelNo+"  dfdfdfdf");
-		
-	
 		model.addAttribute("CUSTNO", custNo);
 		model.addAttribute("HOTELNAME", hotelName);
 		model.addAttribute("HOTELNO", hotelNo);

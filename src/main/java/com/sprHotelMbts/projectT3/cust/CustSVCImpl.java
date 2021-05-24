@@ -47,7 +47,7 @@ public class CustSVCImpl implements ICustSVC{
 		
 		custMebc.insert(dto);
 		
-		return "redirect:/index.jsp";  		// 리턴값 정해줘야함.
+		return "redirect:/index.jsp";  		
 	}
 
 	@Override	

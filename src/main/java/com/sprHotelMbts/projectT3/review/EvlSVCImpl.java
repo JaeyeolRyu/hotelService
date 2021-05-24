@@ -43,11 +43,6 @@ public class EvlSVCImpl implements IEvlSVC{
 			
 		List<AdEvlDTO> list = new ArrayList<AdEvlDTO>();
 		
-		System.out.println("div 값 : " + div);
-		System.out.println("value 값 : " + value);
-		System.out.println("page 값 : " + pageNo);
-		
-		
 		if ( div.equals("hotelName")) {
 			list = evlQebc.sltHotelEvl(value, (pageNo-1) * MAXCNT + 1, MAXCNT + 1);
 		} else if ( div.equals("custName")) {

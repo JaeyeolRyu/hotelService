@@ -22,7 +22,7 @@ public class EmailController {
 
 	@Autowired
 	MailService mailService;
-	
+
 	@RequestMapping(value = "/email.do")
 	public ModelAndView board2() {
 
@@ -37,20 +37,16 @@ public class EmailController {
 		return mv;
 
 	}
-	
-	
+
 	@RequestMapping("sendEmail")
 	public String sendEmail() {
 
 		return "sendEmail";
 	}
-	
 
-	
-	
 	@RequestMapping(value = "createEmailCheck.do", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> createEmailCheck(@RequestParam String userEmail,  HttpServletRequest req, Model model) {
+	public Map<String, Object> createEmailCheck(@RequestParam String userEmail, HttpServletRequest req, Model model) {
 		// 이메일 인증
 
 		int ran = new Random().nextInt(900000) + 100000;
@@ -61,7 +57,6 @@ public class EmailController {
 
 		session.setAttribute("authCode", authCode);
 
-
 		String subject = "Hocance 인증 번호 입니다.";
 
 		StringBuilder sb = new StringBuilder();
@@ -69,13 +64,12 @@ public class EmailController {
 		sb.append("귀하의 인증 코드는 " + authCode + "입니다.");
 
 		model.addAttribute("RANDOM", authCode);
-		
+
 		Map<String, Object> m = new HashMap<String, Object>();
 		m.put("AA", authCode);
 
-		mailService.send(subject, sb.toString(), "win10040127@gmail.com", userEmail);
-		
-		
+		mailService.send(subject, sb.toString(), "win10049127@gmail.com", userEmail);
+
 		return m;
 	}
 

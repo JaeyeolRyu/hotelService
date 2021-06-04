@@ -28,7 +28,7 @@ public interface ICustSVC {
 	
 	String logout(Model model, HttpSession session);
 	
-	CustDTO emailCheck(String custEmail);
+	boolean emailCheck(String custEmail);
 	
 	String emailFind(String custName, String custTel, Model model);
 	

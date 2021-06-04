@@ -120,15 +120,9 @@
 			$('#updateFrm').submit();
 
 		});
-
-	/* 	var str = '<input type="password" name="oldPw" placeholder="현재 비밀번호 " value=""><br>' +
-				  '<input type="password" name="newPw" placeholder="새 비밀번호 " value=""><br>' + 
-				  '<input type="password" name="newPwCheck" placeholder="새 비밀번호 확인" value=""><br>' +
-				  '<input type="button" id="updatePwBtn" name="updatePwBtn" value="변경하기">' +
-				  '<input type="button" id="cancleBtn" name="cancelBtn" value="취소">'; */
 		
 		$(document).on('click', '[name=changePwBtn]', function(event) {  	
-			//$('#addDiv').append(str);
+			
 			$('#addDiv').show();
 		})
 		
@@ -151,8 +145,6 @@
 				alert("기존비밀번호가 일치하지 않습니다.");
 				return;
 			}
-			
-			
 			
 			if( newPw != newPwCheck ) { 
 				alert("비밀번호가 일치하지 않습니다");

@@ -176,7 +176,6 @@ public class CustCTRL {
 		CustDTO dto = custSvc.sltOne(custNo, model);
 		dto.setCustPw(newPw);
 		
-		
 		String viewPage = custSvc.pwUpdate(dto, model);
 		
 		return viewPage;
@@ -213,11 +212,8 @@ public class CustCTRL {
 	@RequestMapping(value = "emailCheck.do", produces = "application/text;charset=UTF-8")
 	@ResponseBody
 	public String emailCheck(@ModelAttribute("custEmail") String custEmail) throws Exception {
-		CustDTO dto = custSvc.emailCheck(custEmail);
-		boolean result = false;
-		if (dto == null) {
-			result = true;
-		}
+ 
+		boolean result = custSvc.emailCheck(custEmail);
 
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("result", result);
@@ -251,6 +247,5 @@ public class CustCTRL {
 		return "emailFind";
 
 	}
-	
 
 }

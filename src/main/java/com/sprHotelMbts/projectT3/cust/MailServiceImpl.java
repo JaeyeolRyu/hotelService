@@ -23,7 +23,7 @@ public class MailServiceImpl implements MailService {
 	@Override
 	public boolean send(String subject, String text, String from, String to) {
 	// javax.mail.internet.MimeMessage
-	
+		
 		MimeMessage message = javaMailSender.createMimeMessage();
 	
 		try {

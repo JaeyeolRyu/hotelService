@@ -57,7 +57,6 @@
 $(document).ready(function(){
 	
 	$("#emailBtn").click( function(){
-		
 		/* 이메일 중복 체크 후 메일 발송 비동기 처리 */
 		var userEmail = $("#email").val();
 		
@@ -66,12 +65,10 @@ $(document).ready(function(){
 			return false;
 		}
 		
-		
 		$.ajax({
 
 			type:"get",
 			url : "createEmailCheck.do",
-			// url : "<c:url value='/login/createEmailCheck.do'/>", 원본
 			
 			data : {
 				userEmail :  userEmail,

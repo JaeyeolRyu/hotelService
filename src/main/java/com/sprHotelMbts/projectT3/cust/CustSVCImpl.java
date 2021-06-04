@@ -102,7 +102,7 @@ public class CustSVCImpl implements ICustSVC{
 
 	@Override	// 회원정보수정
 	public String pwUpdate(CustDTO dto, Model model) { 	
-		
+		System.out.println(dto.toString());
 		custMebc.update(dto);
 		
 		return "custMyPage";  		// 리턴값 정해줘야함.
@@ -267,15 +267,16 @@ public class CustSVCImpl implements ICustSVC{
 	}
 	 
 	@Override	// 이메일중복확인
-	public CustDTO emailCheck(String custEmail) {
+	public boolean emailCheck(String custEmail) {
 		
 		CustDTO dto = custQebc.sltOneEmail(custEmail);
-		
+		boolean isTrue = false;
 		if( dto == null) {
-			return null;
+			
+			isTrue = true;
 		}
 		
-		return dto;
+		return isTrue;
 	}
 	
 	@Override	// 관리자용 회원삭제 ( 평소 사용 x )

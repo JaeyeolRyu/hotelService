@@ -243,8 +243,8 @@ body {
 							<div class="col-lg-8">
 								<div class="header-info-left">
 									<ul>
-										<li>leedonggu1@naver.com</li>
-										<li>010-7377-9128</li>
+										<li>win100488@naver.com</li>
+										<li>010-2787-9127</li>
 										<li>have a nice day</li>
 
 									</ul>

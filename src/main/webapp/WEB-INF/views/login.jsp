@@ -89,21 +89,9 @@ $(document).ready(function(){
 					document.getElementById('login').reset();
 					return false;
 			} 
- 				/* if(!res.equals(null)){
-						alert("null로옴");
-						document.getElementById('login').reset();
-						return false;
-				} 
-				if( res != ""){
-						alert("쌍따옴표");
-						document.getElementById('login').reset();
-						return false;
-					}  */
 				
 				window.location.href = "main";
 
-				
-				
 			},
 			error:function(data){
 				alert("에러가 발생했습니다.");

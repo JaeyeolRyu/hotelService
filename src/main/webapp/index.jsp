@@ -304,7 +304,7 @@ span {
 								</div>
 
 								<div class="search-form mb-30">
-									<input class="search-button" type="submit" value="searchttt" />
+									<input class="search-button" type="submit" value="호텔 검색" />
 									<!-- <a href="">Search</a>  -->
 								</div>
 							</form>

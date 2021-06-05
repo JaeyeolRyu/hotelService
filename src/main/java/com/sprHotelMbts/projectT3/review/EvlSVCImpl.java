@@ -45,7 +45,7 @@ public class EvlSVCImpl implements IEvlSVC{
 		
 		if ( div.equals("hotelName")) {
 			list = evlQebc.sltHotelEvl(value, (pageNo-1) * MAXCNT + 1, MAXCNT + 1);
-		} else if ( div.equals("custName")) {
+		} else  { // if ( div.equals("custName"))일 경우
 			list = evlQebc.sltCustEvl(value, (pageNo-1) * MAXCNT + 1, MAXCNT + 1);
 		} 
 		
@@ -62,12 +62,11 @@ public class EvlSVCImpl implements IEvlSVC{
 			model.addAttribute("NEXT", false);
 		}
 		
-		
 		model.addAttribute("LIST", list);
 		model.addAttribute("PAGENO", pageNo);	
 		
 		
-		return "adEvl"; //페이지 정해줘야함.
+		return "adEvl"; 
 	}
 
 	@Override

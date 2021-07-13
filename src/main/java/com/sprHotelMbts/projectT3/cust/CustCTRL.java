@@ -20,11 +20,6 @@ public class CustCTRL {
 	@Autowired
 	private ICustSVC custSvc;
 
-/*	@RequestMapping(value = "main")
-	public String mainPage() {
-
-		return "redirect:/main.jsp";
-	}*/
 	
 	@RequestMapping("custSltOne") // 마이페이지 상세정보 조회,수정용 sltOne
 	public String sltOne(@SessionAttribute("CUSTNO") String custNo, Model model) {
